@@ -1,6 +1,9 @@
 const db = require('../db');
 
-const getCars = () => db.query('SELECT * FROM cars ORDER BY id');
+const getCars = async () => {
+  const { rows } = await db.query('SELECT * FROM cars ORDER BY id');
+  return rows;
+};
 
 async function deleteCar(id) {
   const { rows } = await db.query('DELETE FROM cars WHERE id = $1', [id]);

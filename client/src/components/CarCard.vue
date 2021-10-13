@@ -26,12 +26,18 @@
         >
           <span>DETAILS</span>
         </v-btn>
+
+        <v-btn @click="delCar(c.id)" :cars="c" class="white--text red darken-1" flat value="feed">
+          <span>DELETE</span>
+        </v-btn>
       </v-card-text>
     </v-card>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   props: {
     c: {
@@ -44,6 +50,12 @@ export default {
     },
     toDetails(id) {
       this.$router.push(`/details/${id}`);
+    },
+    async delCar(id) {
+      await axios({
+        url: `http://localhost:3000/cars/${id}`,
+        method: 'DELETE',
+      });
     },
   },
 };
